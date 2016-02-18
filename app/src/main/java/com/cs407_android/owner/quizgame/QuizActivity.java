@@ -1,39 +1,36 @@
 package com.cs407_android.owner.quizgame;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * .
+ */
+public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+       setContentView(R.layout.activity_quiz); //xml ref
 
-        //Don't start over if we rotate the screen
-        if (savedInstanceState != null) {
-            return;
-        }
-    }
-
-
-    public void playPressed(View view) {
-        //KAD Put stuff to start game play activity
-        Intent other = new Intent(this, QuizActivity.class); //we want to start a new activity, PlayActivity
-        startActivity(other);
+        //TA implementation
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.main_fragment_container, QuestionFragment.newInstance())
+                .addToBackStack(null)
+                .commit();
+        //TA end
     }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        getMenuInflater().inflate(R.menu.menu_play, menu);
 //        return true;
 //    }
-
+//
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        // Handle action bar item clicks here. The action bar will
@@ -48,4 +45,6 @@ public class MainActivity extends AppCompatActivity {
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+//}
+
 }
