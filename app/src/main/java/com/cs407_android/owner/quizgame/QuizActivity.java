@@ -18,7 +18,7 @@ public class QuizActivity extends AppCompatActivity {
         //TA implementation
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.main_fragment_container, QuestionFragment.newInstance())
+                .replace(R.id.main_fragment_container, QuestionFragment.newInstance(0))
                 .addToBackStack(null)
                 .commit();
         //TA end

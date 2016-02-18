@@ -19,29 +19,32 @@ import android.widget.TextView;
  * create an instance of this fragment.
  */
 public class QuestionFragment extends Fragment {
+    private static final String ARG_QUESTIONS_CORRECT = "questions correct";
 
     //fields here
+    private int answersCorrect = 0;
 
     private RadioButton button1;
     private RadioButton button2;
     private RadioButton button4;
     private RadioButton button8;
 
+    private Button submitButton;
+
     private TextView textQuestion;
 
     /**
-     * DONT CHANGE THIS METHOD
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param //TODO
+     * @param questionsCorrect - the number of questions correct so far
      * @return A new instance of fragment PlayFragment.
      */
-    public static QuestionFragment newInstance() {
+    public static QuestionFragment newInstance(int questionsCorrect) {
         QuestionFragment fragment = new QuestionFragment();
         Bundle args = new Bundle();
-        //args.putString(ARG_PLAYER_ONE, player1Choice);
-       // fragment.setArguments(args);
+        args.putInt(ARG_QUESTIONS_CORRECT,questionsCorrect);
+       fragment.setArguments(args);
         return fragment;
     }
 
@@ -53,10 +56,9 @@ public class QuestionFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if (getArguments() != null) {
-//            player1Choice = getArguments().getString(ARG_PLAYER_ONE);
-//            player2Choice = getArguments().getString(ARG_PLAYER_TWO);
-//        }
+if (getArguments() != null) {
+    answersCorrect = getArguments().getInt(ARG_QUESTIONS_CORRECT);
+}
     }
 
     @Override
@@ -71,6 +73,7 @@ public class QuestionFragment extends Fragment {
         button2 = (RadioButton) view.findViewById(R.id.button2);
         button4 = (RadioButton) view.findViewById(R.id.button4);
         button8 = (RadioButton) view.findViewById(R.id.button8);
+        submitButton = (Button) view.findViewById(R.id.submitButton);
 
         //set question text
         textQuestion = (TextView) view.findViewById(R.id.text_question);
@@ -82,7 +85,7 @@ public class QuestionFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-      //implementing click interaction
+             //implementing click interaction
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,27 +108,32 @@ public class QuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //correct answer
-                System.out.println("Yay!!!!!!!!"); //TODO remove
+               answersCorrect++;
             }
         });
-
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayWinner(answersCorrect);
+            }
+        });
     }
 
 
-    private void displayWinner(String winner) {
-        //TODO
-        //do a prompt about the winner
+    private void displayWinner(int correctAnswers) {
+        String result = correctAnswers + "/2 total questions";
+        //do a prompt about the results
         new AlertDialog.Builder(getActivity())
                 .setCancelable(true)
-                .setTitle("Winner is:")
-                .setMessage(winner)
+                .setTitle("Quiz results:")
+                .setMessage(result)
                 .setPositiveButton("Replay", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //KAD start a rematch!
                         getFragmentManager()
                                 .beginTransaction() //KAD apparently getText(int) will retain any rich text styling applied to the string.
-                                .replace(R.id.main_fragment_container, QuestionFragment.newInstance())
+                                .replace(R.id.main_fragment_container, ImageQuestionFragment.newInstance())
                                 .addToBackStack(null)
                                 .commit();
                     }

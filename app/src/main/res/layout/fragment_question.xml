@@ -40,6 +40,12 @@
             android:layout_height="wrap_content"
             android:text="8 whole steps"
             android:id="@+id/button8" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="submit answer"
+            android:id="@+id/submitButton" />
     </LinearLayout>
 
 </FrameLayout>
