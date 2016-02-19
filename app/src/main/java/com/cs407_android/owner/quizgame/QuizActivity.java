@@ -16,9 +16,7 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_quiz); //xml ref
 
-     //   this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);//KAD make keyboard go away
-
-        getFragmentManager()
+            getFragmentManager()
                 .beginTransaction()
                 .replace(R.id.main_fragment_container, ImageQuestionFragment.newInstance())
                 .addToBackStack(null)

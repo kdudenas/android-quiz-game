@@ -2,6 +2,9 @@
     <string name="app_name">QuizGame</string>
     <string name="start">Start</string>
     <string name="text_question">How many whole steps are in an octave?</string>
-    <string name="image_question">Fill in the blank: this is called a ______ clef.</string>
+    <string name="image_question">Fill in the blank: \nthis is called a ______ clef.</string>
     <string name="title_activity_quiz">QuizActivity</string>
+    <string name="trebleAnswer">treble</string>
+    <string name="takeQuizPrompt">Take the quiz!</string>
+    <string name="submitBtnStr">submit answer</string>
 </resources>

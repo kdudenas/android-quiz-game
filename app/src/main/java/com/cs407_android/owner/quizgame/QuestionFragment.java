@@ -119,11 +119,14 @@ if (getArguments() != null) {
 
 
     private void displayWinner(int correctAnswers) {
-        String result = correctAnswers + "/2 total questions";
+        String result = correctAnswers + "/2 total questions -- ";
+        if(correctAnswers == 2){result+= "Good job!";}
+        else if(correctAnswers == 1){result+= "Almost!";}
+        else {result+= "Try again?";}
         //do a prompt about the results
         new AlertDialog.Builder(getActivity())
                 .setCancelable(true)
-                .setTitle("Quiz results:")
+                .setTitle("Quiz results...")
                 .setMessage(result)
                 .setPositiveButton("Replay", new DialogInterface.OnClickListener() {
                     @Override

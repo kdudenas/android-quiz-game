@@ -72,7 +72,7 @@ public class ImageQuestionFragment extends Fragment {
         imgSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            String answer = "treble";//TODO make resource
+            String answer = getString(R.string.trebleAnswer);
                 if (answerField.getText().toString().equals(answer)){
                     correctAnswers++;
                 }
