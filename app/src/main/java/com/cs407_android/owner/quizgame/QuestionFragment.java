@@ -74,8 +74,6 @@ if (getArguments() != null) {
         button4 = (RadioButton) view.findViewById(R.id.button4);
         button8 = (RadioButton) view.findViewById(R.id.button8);
         submitButton = (Button) view.findViewById(R.id.submitButton);
-
-        //set question text
         textQuestion = (TextView) view.findViewById(R.id.text_question);
 
         return view;

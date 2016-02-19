@@ -9,13 +9,32 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal|top">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/questionImage"
+            android:src="@drawable/treble_clef" />
+
         <TextView
             android:gravity="center"
             android:textAppearance="?android:textAppearanceLarge"
             android:text="@string/image_question"
-            android:id="@+id/header"
+            android:id="@+id/img_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/userAnswer"
+            android:hint="Type answer here"
+            android:imeOptions="actionDone"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="submit answer"
+            android:id="@+id/imgSubmitButton" />
 
 
     </LinearLayout>

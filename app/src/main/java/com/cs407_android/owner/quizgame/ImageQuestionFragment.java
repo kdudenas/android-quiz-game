@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -20,25 +22,21 @@ import android.widget.TextView;
 public class ImageQuestionFragment extends Fragment {
 
     //fields here
-
-    private Button rockButton;
-    private Button paperButton;
-    private Button scissorsButton;
-    private TextView headerTextView;
+    private int correctAnswers = 0;
+    private Button imgSubmitButton;
+    private ImageView questionImage;
+    private TextView question;
+    private EditText answerField;
 
     /**
-     * DONT CHANGE THIS METHOD
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param //TODO
-     * @return A new instance of fragment PlayFragment.
+     * @return A new instance of fragment ImageQuestionFragment.
      */
     public static ImageQuestionFragment newInstance() {
         ImageQuestionFragment fragment = new ImageQuestionFragment();
         Bundle args = new Bundle();
-        //args.putString(ARG_PLAYER_ONE, player1Choice);
-       // fragment.setArguments(args);
         return fragment;
     }
 
@@ -49,82 +47,46 @@ public class ImageQuestionFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        if (getArguments() != null) {
-//            player1Choice = getArguments().getString(ARG_PLAYER_ONE);
-//            player2Choice = getArguments().getString(ARG_PLAYER_TWO);
-//        }
     }
 
     @Override
-    //KAD this is the gameplay screen, basically. Displays to the user the three options: rock, paper, scissors.
+    //KAD displays an image and a question; user submits answer via text field
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        //TA Implementation DON'T CHANGE
         View view = null;
-        view = inflater.inflate(R.layout.fragment_question, container, false);
+        view = inflater.inflate(R.layout.fragment_image_question, container, false);
 
         //instantiate widgets
-//        rockButton = (Button) view.findViewById(R.id.rock);
-
-
-        //set header
-//        if (player1Choice == null) {
-//            headerTextView.setText(getString(R.string.player_1_header));
-//        } else {
-//            headerTextView.setText(getString(R.string.player_2_header));
-//        }
+        imgSubmitButton = (Button) view.findViewById(R.id.imgSubmitButton);
+        questionImage = (ImageView) view.findViewById(R.id.questionImage);
+        question = (TextView) view.findViewById(R.id.img_question);
+        answerField = (EditText) view.findViewById(R.id.userAnswer);
 
         return view;
-
-        // End TA Implementation
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        //TA Implementation //different way of implementing click interaction.
-        rockButton.setOnClickListener(new View.OnClickListener() {
+        //different way of implementing click interaction.
+        imgSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+            String answer = "treble";//TODO make resource
+                if (answerField.getText().toString().equals(answer)){
+                    correctAnswers++;
+                }
 
+                //next question
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.main_fragment_container, QuestionFragment.newInstance(correctAnswers))
+                        .addToBackStack(null)
+                        .commit();
 
             }
         });
 
-
-    }
-
-
-    private void displayWinner(String winner) {
-        //TODO
-        //do a prompt about the winner
-        new AlertDialog.Builder(getActivity())
-                .setCancelable(true)
-                .setTitle("Winner is:")
-                .setMessage(winner)
-                .setPositiveButton("Replay", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //KAD start a rematch!
-                        getFragmentManager()
-                                .beginTransaction() //KAD apparently getText(int) will retain any rich text styling applied to the string.
-                                .replace(R.id.main_fragment_container, ImageQuestionFragment.newInstance())
-                                .addToBackStack(null)
-                                .commit();
-                    }
-                })
-                .setNegativeButton("Quit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //KAD back out to the start screen
-                        getActivity().finish();
-
-                    }
-                })
-                .show();
 
     }
 

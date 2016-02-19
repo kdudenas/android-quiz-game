@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 /**
  * .
@@ -15,13 +16,13 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
        setContentView(R.layout.activity_quiz); //xml ref
 
-        //TA implementation
+     //   this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);//KAD make keyboard go away
+
         getFragmentManager()
                 .beginTransaction()
-                .replace(R.id.main_fragment_container, QuestionFragment.newInstance(0))
+                .replace(R.id.main_fragment_container, ImageQuestionFragment.newInstance())
                 .addToBackStack(null)
                 .commit();
-        //TA end
     }
 
 //    @Override
